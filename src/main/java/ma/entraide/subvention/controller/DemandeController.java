@@ -15,6 +15,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.awt.*;
 import java.util.List;
 
+import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
+
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/demande")
@@ -114,7 +116,7 @@ public class DemandeController {
         return new ResponseEntity<>(data, HttpStatus.OK);
     }
 
-    @PutMapping("/upload/{id}")
+    @PutMapping(value = "/upload/{id}", consumes = {MULTIPART_FORM_DATA_VALUE})
     public ResponseData uploadFile(@PathVariable Long id,@RequestParam("file") MultipartFile file) {
         String downloadUrl = "";
         Demande demande = demandeService.uploadFile(id, file);
