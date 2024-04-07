@@ -1,14 +1,18 @@
 package ma.entraide.subvention.controller;
 
 import ma.entraide.subvention.entity.Demande;
+import ma.entraide.subvention.entity.ResponseData;
 import ma.entraide.subvention.service.DemandeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.http.ResponseEntity;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import ma.entraide.subvention.Exceptions.ErrorResponse;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.awt.*;
 import java.util.List;
 
 @RestController
@@ -110,5 +114,27 @@ public class DemandeController {
         return new ResponseEntity<>(data, HttpStatus.OK);
     }
 
+    @PutMapping("/upload/{id}")
+    public ResponseData uploadFile(@PathVariable Long id,@RequestParam("file") MultipartFile file) {
+        String downloadUrl = "";
+        Demande demande = demandeService.uploadFile(id, file);
+        downloadUrl = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/demande/download/"+ demande.getId())
+                .toUriString();
+        return new ResponseData(demande.getFileName(),
+                downloadUrl,
+                file.getContentType(),
+                file.getSize());
+    }
+
+    @GetMapping("/download/{id}")
+    public ResponseEntity<Resource> downloadFile(@PathVariable Long id) {
+        Demande demande = null;
+        demande = demandeService.getDemandeById(id);
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(demande.getFileType()))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + demande.getFileName() + "\"")
+                .body(new ByteArrayResource(demande.getZipData()));
+    }
 
 }

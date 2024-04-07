@@ -35,7 +35,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.csrf(csrf->csrf.disable())
                 .authorizeHttpRequests(auth->auth
-                        .requestMatchers("/auth/welcome","/auth/addUser","/auth/login","/demande/addDemande","/demande/code/{code}","/demande/addDemande","/demande/{id}","/deleguation/byIdCoord/{id}","/coordination")
+                        .requestMatchers("/auth/welcome","/auth/addUser","/demande/download/{id}","/auth/login","/demande/addDemande","/demande/code/{code}","/demande/addDemande","/demande/{id}","/deleguation/byIdCoord/{id}","/coordination")
                         .permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

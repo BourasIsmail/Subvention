@@ -7,6 +7,7 @@ import ma.entraide.subvention.repository.DemandeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -288,6 +289,23 @@ public class DemandeService {
         }
         else
             return dataglobale();
+    }
+
+    public Demande uploadFile(Long id, MultipartFile file) {
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        try{
+            if(fileName.contains("..")){
+                throw new Exception("Filemane contains invalid path sequence"
+                        + fileName);
+            }
+            Demande demande = getDemandeById(id);
+            demande.setFileName(fileName);
+            demande.setFileType(file.getContentType());
+            demande.setZipData(file.getBytes());
+            return demandeRepository.save(demande);
+        }catch (Exception e){
+            throw new ResourceNotFoundException("File not uploaded"+fileName);
+        }
     }
 
 }
