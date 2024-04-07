@@ -116,6 +116,7 @@ public class DemandeController {
         return new ResponseEntity<>(data, HttpStatus.OK);
     }
 
+
     @PutMapping(value = "/upload/{id}", consumes = {MULTIPART_FORM_DATA_VALUE})
     public ResponseData uploadFile(@PathVariable Long id,@RequestParam("file") MultipartFile file) {
         String downloadUrl = "";
