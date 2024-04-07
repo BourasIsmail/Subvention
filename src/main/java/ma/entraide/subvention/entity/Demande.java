@@ -118,6 +118,9 @@ public class Demande {
     @Lob
     private byte[] zipData;
 
+    private String fileName;
+
+    private String fileType;
 
 
 }
