@@ -21,4 +21,7 @@ public class Coordination {
     @Column(unique = true)
     private String nom;
 
+    public Coordination(String s) {
+        this.nom = s;
+    }
 }

@@ -90,4 +90,13 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable Integer id) {
+        String result = userInfoService.deleteUser(id);
+        if (result.equals("User deleted successfully")) {
+            return ResponseEntity.ok("User deleted successfully");
+        }
+        return ResponseEntity.notFound().build();
+    }
 }

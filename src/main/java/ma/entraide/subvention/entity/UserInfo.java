@@ -21,4 +21,10 @@ public class UserInfo {
     @JoinColumn(name = "deleguation_id")
     private Deleguation deleguation;
 
+    public UserInfo(String name, String email, String roles, String password) {
+        this.name = name;
+        this.email = email;
+        this.roles = roles;
+        this.password = password;
+    }
 }

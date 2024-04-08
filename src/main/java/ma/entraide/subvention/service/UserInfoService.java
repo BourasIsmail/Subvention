@@ -66,4 +66,10 @@ public class UserInfoService implements UserDetailsService {
             return "Error occurred while updating user";
         }
     }
+
+    public String deleteUser(Integer id) {
+        UserInfo userInfo = userInfoRepository.findById(id).get();
+        userInfoRepository.delete(userInfo);
+        return "User deleted successfully";
+    }
 }

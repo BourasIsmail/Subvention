@@ -24,4 +24,9 @@ public class Deleguation {
     @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "coordiantion_id")
     private Coordination coordination;
+
+    public Deleguation(String nom, Coordination coordination) {
+        this.nom = nom;
+        this.coordination = coordination;
+    }
 }

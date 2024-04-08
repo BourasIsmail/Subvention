@@ -116,6 +116,7 @@ public class Demande {
     //Zipe file
 
     @Lob
+    @Column(columnDefinition = "longblob")
     private byte[] zipData;
 
     private String fileName;
