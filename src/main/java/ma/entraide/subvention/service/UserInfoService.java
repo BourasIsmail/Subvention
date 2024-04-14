@@ -72,4 +72,6 @@ public class UserInfoService implements UserDetailsService {
         userInfoRepository.delete(userInfo);
         return "User deleted successfully";
     }
+
+
 }
