@@ -26,6 +26,10 @@ public class UserInfoService implements UserDetailsService {
     }
 
     public String addUser(UserInfo userInfo){
+        String pwd = userInfo.getPassword();
+        if(pwd == null || pwd.trim().equals("") || pwd.length()<4){
+            throw new UsernameNotFoundException("password is too short or empty");
+        }
         userInfo.setPassword(passwordEncoder.encode(userInfo.getPassword()));
         userInfoRepository.save(userInfo);
         return "User added successfully";
@@ -51,6 +55,10 @@ public class UserInfoService implements UserDetailsService {
         try{
         Optional<UserInfo> optionalUserInfo = userInfoRepository.findById(id);
         if (optionalUserInfo.isPresent()) {
+            String pwd = updatedUserInfo.getPassword();
+            if(pwd == null || pwd.trim().equals("") || pwd.length()<4){
+                throw new Exception("password is too short or empty");
+            }
             UserInfo existingUser = optionalUserInfo.get();
             existingUser.setName(updatedUserInfo.getName());
             existingUser.setEmail(updatedUserInfo.getEmail());

@@ -16,6 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -35,10 +36,17 @@ public class UserController {
     }
 
     @PostMapping("/addUser")
-    public String addUser(@RequestBody UserInfo userInfo){
-        return userInfoService.addUser(userInfo);
+    public ResponseEntity<String> addUser(@Valid @RequestBody UserInfo userInfo){
+        try {
+            String reuslt =  userInfoService.addUser(userInfo);
+            return ResponseEntity.ok(reuslt);
+        }
+        catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
 
     }
+
     @PostMapping("/login")
     public ResponseEntity<?> addUser(@RequestBody AuthRequest authRequest) {
         try {
@@ -53,7 +61,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid credentials");
         }
     }
-
+/*
     @PostMapping("/logout")
     public ResponseEntity<String> logout(HttpServletRequest request) {
         try {
@@ -65,7 +73,7 @@ public class UserController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred during logout");
         }
-    }
+    }*/
 
     @GetMapping("/getUsers")
     @PreAuthorize("hasAuthority('ADMIN_ROLES')")
@@ -82,12 +90,12 @@ public class UserController {
     }
 
     @PutMapping("/updateUser/{id}")
-    public ResponseEntity<String> updateUser(@PathVariable Integer id, @RequestBody UserInfo userInfo) {
+    public ResponseEntity<String> updateUser(@PathVariable Integer id,@Valid @RequestBody UserInfo userInfo) {
         String result = userInfoService.updateUser(id, userInfo);
         if (result.equals("User updated successfully")) {
             return ResponseEntity.ok(result);
         } else {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
         }
     }
 
