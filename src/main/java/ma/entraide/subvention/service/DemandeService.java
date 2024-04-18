@@ -54,7 +54,11 @@ public class DemandeService {
     }
 
     public List<Demande> getAllDemande(){
-        return demandeRepository.findAll();
+        return demandeRepository.findAllDemandesPresent();
+    }
+
+    public List<Demande> getDemandesSupprime(){
+        return demandeRepository.findAllDemandesNotPresent();
     }
 
     public Demande getDemandeByCode(String code){
@@ -87,9 +91,10 @@ public class DemandeService {
                 demande.getNbrBeneficiairesHommes());
         //4-champs nbre total agents
         demande.setNbrTotalAgents(demande.getNbrAgentsFemmes()+demande.getNbrAgentsHommes());
-
         //5- champs etat
         demande.setEtat("قيد العمل");
+        //6- champs supprimé
+        demande.setSupprime(false);
 
         // Check if there is a demande with the same numAutorisation created in the same year
         String numAutorisation = demande.getNumAutorisation();
@@ -148,16 +153,30 @@ public class DemandeService {
         demande.setRecetteTotalAnneePrecedente(newDemande.getRecetteTotalAnneePrecedente());
         demande.setTypeMilieu(newDemande.getTypeMilieu());
 
+        //date de modification
+        Date date = new Date();
+        demande.setDateDerniereModification(date);
+
         //zipData
-
-
         demande.setEtat(newDemande.getEtat());
 
         return demandeRepository.save(demande);
     }
 
     public void deleteDemande(Long id){
-        demandeRepository.deleteById(id);
+        this.archiveDemande(id);
+    }
+
+    public Demande archiveDemande(Long id){
+        Demande demande = this.getDemandeById(id);
+        demande.setSupprime(true);
+        return demandeRepository.save(demande);
+    }
+
+    public Demande desarchiveDemande(Long id){
+        Demande demande = this.getDemandeById(id);
+        demande.setSupprime(false);
+        return demandeRepository.save(demande);
     }
 
     public int demandesEnCours(){

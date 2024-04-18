@@ -16,19 +16,28 @@ public class UserInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     @Column(nullable = false, unique = true)
     private String name;
+
     @Column(nullable = false)
     @Email
     private String email;
+
     @Column(nullable = false)
     private String roles;
+
     @Column(nullable = false)
     @Size(min = 5)
     private String password;
+
     @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "deleguation_id")
     private Deleguation deleguation;
+
+    @ManyToOne(cascade = CascadeType.DETACH)
+    @JoinColumn(name = "coordination_id")
+    private Coordination coordination;
 
     public UserInfo(String name, String email, String roles, String password) {
         this.name = name;

@@ -42,10 +42,11 @@ public class SpringSecurityApplication {
 		return args ->{
 			logger.info("Running Spring Security Application ...");
 			//Admin Account
-			/*
-			UserInfo admin = new UserInfo("admin","admin@gmailcom","ADMIN_ROLES","123456");
+
+			UserInfo admin = new UserInfo("test","admin@gmailcom","USER_ROLES","123456");
 			userInfoService.addUser(admin);
 			//Coordinations
+			/*
 			Coordination coordination1 = new Coordination("طنجة-تطوان-الحسيمة");
 			Coordination coordination2 = new Coordination("الشرق");
 			Coordination coordination3 = new Coordination("فاس-مكناس");
@@ -246,6 +247,7 @@ coordinationService.addCoordination(coordination12);
 			deleguationService.addDeleguation(deleguation81);
 			deleguationService.addDeleguation(deleguation82);
 */
+//Users
 
 
 			logger.info("end");

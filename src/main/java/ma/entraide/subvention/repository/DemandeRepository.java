@@ -18,6 +18,12 @@ public interface DemandeRepository extends JpaRepository<Demande, Long> {
 
     Optional<Demande> findByCodeDemande(String codeDemande);
 
+    @Query("SELECT d FROM Demande d where d.supprime = false ")
+    List<Demande> findAllDemandesPresent();
+
+    @Query("SELECT d from Demande d where d.supprime= true")
+    List<Demande> findAllDemandesNotPresent();
+
     Optional<List<Demande>> findByEmailPresident(String emailPresident);
 
     @Query("SELECT d FROM Demande d WHERE d.deleguation.nom = :deleguation")

@@ -86,6 +86,12 @@ public class Demande {
     @Column(unique = true)
     private String codeDemande;
 
+    private boolean supprime;
+
+    private Date dateSuppression;
+
+    private Date dateDerniereModification;
+
     //champs de la demande de subvention remplie par la delegation
 
     private String rib;
@@ -122,6 +128,8 @@ public class Demande {
     private String fileName;
 
     private String fileType;
+
+
 
 
 }
