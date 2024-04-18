@@ -140,4 +140,9 @@ public class DemandeController {
                 .body(new ByteArrayResource(demande.getZipData()));
     }
 
+    @PutMapping("/restaurer/{id}")
+    public ResponseEntity<Demande> restaurer(@PathVariable Long id){
+        return new ResponseEntity<>(demandeService.desarchiveDemande(id), HttpStatus.OK);
+    }
+
 }

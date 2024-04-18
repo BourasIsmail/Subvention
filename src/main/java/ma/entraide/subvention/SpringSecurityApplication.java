@@ -43,8 +43,8 @@ public class SpringSecurityApplication {
 			logger.info("Running Spring Security Application ...");
 			//Admin Account
 
-			UserInfo admin = new UserInfo("test","admin@gmailcom","USER_ROLES","123456");
-			userInfoService.addUser(admin);
+			/*UserInfo admin = new UserInfo("test","admin@gmailcom","USER_ROLES","123456");
+			userInfoService.addUser(admin);*/
 			//Coordinations
 			/*
 			Coordination coordination1 = new Coordination("طنجة-تطوان-الحسيمة");
