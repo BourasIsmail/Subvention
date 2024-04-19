@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.zip.ZipFile;
 
 @Entity
@@ -129,7 +131,11 @@ public class Demande {
 
     private String fileType;
 
+    private List<String> cible = new ArrayList<>();
 
+    private double montantSuggereParAssoc;
+
+    private double montantSuggereParDeleg;
 
 
 }

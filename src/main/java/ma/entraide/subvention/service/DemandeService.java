@@ -152,6 +152,10 @@ public class DemandeService {
         demande.setRevenuTotalAnneePrecedente(newDemande.getRevenuTotalAnneePrecedente());
         demande.setRecetteTotalAnneePrecedente(newDemande.getRecetteTotalAnneePrecedente());
         demande.setTypeMilieu(newDemande.getTypeMilieu());
+        demande.setCodeDemande(newDemande.getCodeDemande());
+        demande.setCible(newDemande.getCible());
+        demande.setMontantSuggereParAssoc(newDemande.getMontantSuggereParAssoc());
+        demande.setMontantSuggereParDeleg(newDemande.getMontantSuggereParDeleg());
 
         //date de modification
         Date date = new Date();
@@ -164,6 +168,9 @@ public class DemandeService {
     }
 
     public void deleteDemande(Long id){
+        Date date = new Date();
+        Demande demande = this.getDemandeById(id);
+        demande.setDateSuppression(date);
         this.archiveDemande(id);
     }
 

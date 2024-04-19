@@ -31,6 +31,12 @@ public class DemandeController {
         return new ResponseEntity<>(demandes, HttpStatus.OK);
     }
 
+    @GetMapping("/corbeille")
+    public ResponseEntity<List<Demande>> demandeArchive(){
+        List<Demande> demandes = demandeService.getDemandesSupprime();
+        return new ResponseEntity<>(demandes, HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Demande> getDemandeById(@PathVariable Long id){
         try {
