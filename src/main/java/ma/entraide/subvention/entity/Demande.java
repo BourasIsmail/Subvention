@@ -88,6 +88,7 @@ public class Demande {
     @Column(unique = true)
     private String codeDemande;
 
+    @Column(nullable = false)
     private boolean supprime;
 
     private Date dateSuppression;
@@ -107,7 +108,7 @@ public class Demande {
     private int nbrBeneficiairesServicePartiel;
 
 
-    private Date dateCollecte;
+    private String dateCollecte;
 
     private int dureeValidite;
 
@@ -137,5 +138,20 @@ public class Demande {
 
     private double montantSuggereParDeleg;
 
+    //nombre de personne dans chaque categorie cible
+
+    private int age;
+
+    private int enfantNeglige;
+
+    private int enfantSitDifficile;
+
+    private int etudiant;
+
+    private int personneSitDifficile;
+
+    private int personneHandicape;
+
+    private int femmeSitDifficile;
 
 }

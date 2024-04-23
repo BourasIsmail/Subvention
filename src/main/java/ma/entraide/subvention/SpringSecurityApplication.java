@@ -43,10 +43,11 @@ public class SpringSecurityApplication {
 			logger.info("Running Spring Security Application ...");
 			//Admin Account
 
-			/*UserInfo admin = new UserInfo("test","admin@gmailcom","USER_ROLES","123456");
-			userInfoService.addUser(admin);*/
-			//Coordinations
 			/*
+			UserInfo admin = new UserInfo("P1936","moumen.lahcen@gmailcom","ADMIN_ROLES","123456");
+			userInfoService.addUser(admin);
+			//Coordinations
+
 			Coordination coordination1 = new Coordination("طنجة-تطوان-الحسيمة");
 			Coordination coordination2 = new Coordination("الشرق");
 			Coordination coordination3 = new Coordination("فاس-مكناس");
@@ -59,12 +60,25 @@ public class SpringSecurityApplication {
 			Coordination coordination10 = new Coordination("كلميم-واد نون");
 			Coordination coordination11 = new Coordination("العيون-الساقية الحمراء");
 			Coordination coordination12 = new Coordination("الداخلة-وادي الذهب");
-			*/
+
+			coordinationService.addCoordination(coordination1);
+			coordinationService.addCoordination(coordination2);
+			coordinationService.addCoordination(coordination3);
+			coordinationService.addCoordination(coordination4);
+			coordinationService.addCoordination(coordination5);
+			coordinationService.addCoordination(coordination6);
+			coordinationService.addCoordination(coordination7);
+			coordinationService.addCoordination(coordination8);
+			coordinationService.addCoordination(coordination9);
+			coordinationService.addCoordination(coordination10);
+			coordinationService.addCoordination(coordination11);
+			coordinationService.addCoordination(coordination12);
 
 
 			//Delegation
-			/*
+
 			Deleguation deleguation1 = new Deleguation("طنجة اصيلة",coordination1);
+			deleguationService.addDeleguation(deleguation1);
 			Deleguation deleguation2 = new Deleguation("المضيق الفنيدق",coordination1);
 			Deleguation deleguation3 = new Deleguation("تطوان",coordination1);
 			Deleguation deleguation4 = new Deleguation("الفحص انجرة",coordination1);
@@ -149,22 +163,8 @@ public class SpringSecurityApplication {
 			Deleguation deleguation81 = new Deleguation("قلعة السراغنة",coordination7);
 			Deleguation deleguation82 = new Deleguation("شيشاوة",coordination7);
 
-			coordinationService.addCoordination(coordination1);
-			coordinationService.addCoordination(coordination2);
-			coordinationService.addCoordination(coordination3);
-			coordinationService.addCoordination(coordination4);
-			coordinationService.addCoordination(coordination5);
-			coordinationService.addCoordination(coordination6);
-			coordinationService.addCoordination(coordination7);
-			coordinationService.addCoordination(coordination8);
-			coordinationService.addCoordination(coordination9);
-			coordinationService.addCoordination(coordination10);
-			coordinationService.addCoordination(coordination11);
-coordinationService.addCoordination(coordination12);
-*/
 
-			 /*
-			deleguationService.addDeleguation(deleguation1);
+
 			deleguationService.addDeleguation(deleguation2);
 			deleguationService.addDeleguation(deleguation3);
 			deleguationService.addDeleguation(deleguation4);

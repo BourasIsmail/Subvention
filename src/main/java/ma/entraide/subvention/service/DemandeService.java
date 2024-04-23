@@ -156,6 +156,39 @@ public class DemandeService {
         demande.setCible(newDemande.getCible());
         demande.setMontantSuggereParAssoc(newDemande.getMontantSuggereParAssoc());
         demande.setMontantSuggereParDeleg(newDemande.getMontantSuggereParDeleg());
+        //nombre de personne dans chaque categorie
+        demande.setAge(newDemande.getAge()); //nombre de presonne agées
+        demande.setEnfantNeglige(newDemande.getEnfantNeglige());
+        demande.setEnfantSitDifficile(newDemande.getEnfantSitDifficile());
+        demande.setEtudiant(newDemande.getEtudiant());
+        demande.setPersonneSitDifficile(newDemande.getPersonneSitDifficile());
+        demande.setPersonneHandicape(newDemande.getPersonneHandicape());
+        demande.setFemmeSitDifficile(newDemande.getFemmeSitDifficile());
+
+        if(!demande.getCible().contains("المسنين")){
+            demande.setAge(0);
+        }
+        if(!demande.getCible().contains("الأطفال المهملين")){
+            demande.setEnfantNeglige(0);
+        }
+        if(!demande.getCible().contains("الأطفال في وضعية صعبة")){
+            demande.setEnfantSitDifficile(0);
+        }
+        if(!demande.getCible().contains("المتمدرسون")){
+            demande.setEtudiant(0);
+        }
+        if(!demande.getCible().contains("الأشخاص في وضعية صعبة")){
+            demande.setPersonneSitDifficile(0);
+        }
+        if(!demande.getCible().contains("الأشخاص ذوي الإعاقة")){
+            demande.setPersonneHandicape(0);
+        }
+        if(!demande.getCible().contains("الأشخاص ذوي الإعاقة")){
+            demande.setPersonneHandicape(0);
+        }
+        if(!demande.getCible().contains("النساء في وضعية صعبة")){
+            demande.setFemmeSitDifficile(0);
+        }
 
         //date de modification
         Date date = new Date();
@@ -183,6 +216,7 @@ public class DemandeService {
     public Demande desarchiveDemande(Long id){
         Demande demande = this.getDemandeById(id);
         demande.setSupprime(false);
+        demande.setDateSuppression(null);
         return demandeRepository.save(demande);
     }
 
