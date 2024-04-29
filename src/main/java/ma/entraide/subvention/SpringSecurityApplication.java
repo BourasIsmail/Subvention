@@ -38,7 +38,7 @@ public class SpringSecurityApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringSecurityApplication.class, args);
 	}
-
+	/*
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {
@@ -49,10 +49,10 @@ public class SpringSecurityApplication {
 			}
 		};
 	}
-
+*/
 
 	@Bean
-	public CommandLineRunner runner(DeleguationService deleguationService) {
+	public CommandLineRunner runner() {
 		return args ->{
 			logger.info("Running Spring Security Application ...");
 			//Admin Account
