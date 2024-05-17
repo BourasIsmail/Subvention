@@ -90,11 +90,11 @@ public interface DemandeRepository extends JpaRepository<Demande, Long> {
     @Query("SELECT COUNT(d) from Demande d WHERE d.coordination.id = :id")
     int countByCoordinationId(@Param("id") Long id);
 
-    @Query("SELECT COALESCE(SUM(d.nbrAgentsHommes),0) from Demande d")
-    int sumNbrAgentsHommes();
-
-    @Query("SELECT COALESCE(SUM(d.nbrAgentsFemmes),0) from Demande d")
-    int sumNbrAgentsFemmes();
+//    @Query("SELECT COALESCE(SUM(d.nbrAgentsHommes),0) from Demande d")
+//    int sumNbrAgentsHommes();
+//
+//    @Query("SELECT COALESCE(SUM(d.nbrAgentsFemmes),0) from Demande d")
+//    int sumNbrAgentsFemmes();
 
     @Query("SELECT COALESCE(SUM(d.nbrBeneficiairesHommes),0) from Demande d")
     int sumNbrBeneficiairesHommes();
@@ -120,11 +120,11 @@ public interface DemandeRepository extends JpaRepository<Demande, Long> {
     @Query("SELECT COALESCE(SUM(d.nbrBeneficiairesFemmes),0) from Demande d WHERE d.coordination.id = :id")
     int sumNbrBeneficiairesFemmesByCoordination(@Param("id") Long id);
 
-    @Query("SELECT COALESCE(SUM(d.nbrAgentsHommes),0) from Demande d WHERE d.coordination.id = :id")
-    int sumNbrAgentsHommesByCoordination(@Param("id") Long id);
-
-    @Query("SELECT COALESCE(SUM(d.nbrAgentsFemmes),0) from Demande d WHERE d.coordination.id = :id")
-    int sumNbrAgentsFemmesByCoordination(@Param("id") Long id);
+//    @Query("SELECT COALESCE(SUM(d.nbrAgentsHommes),0) from Demande d WHERE d.coordination.id = :id")
+//    int sumNbrAgentsHommesByCoordination(@Param("id") Long id);
+//
+//    @Query("SELECT COALESCE(SUM(d.nbrAgentsFemmes),0) from Demande d WHERE d.coordination.id = :id")
+//    int sumNbrAgentsFemmesByCoordination(@Param("id") Long id);
 
     @Query("SELECT COALESCE(SUM(d.nbrTotalBeneficiaires),0) from Demande d WHERE d.deleguation.id = :id")
     int sumNbrTotalBeneficiairesByDeleguation(@Param("id") Long id);
@@ -138,11 +138,11 @@ public interface DemandeRepository extends JpaRepository<Demande, Long> {
     @Query("SELECT COALESCE(SUM(d.nbrBeneficiairesFemmes),0) from Demande d WHERE d.deleguation.id = :id")
     int sumNbrBeneficiairesFemmesByDeleguation(@Param("id") Long id);
 
-    @Query("SELECT COALESCE(SUM(d.nbrAgentsHommes),0) from Demande d WHERE d.deleguation.id = :id")
-    int sumNbrAgentsHommesByDeleguation(@Param("id") Long id);
-
-    @Query("SELECT COALESCE(SUM(d.nbrAgentsFemmes),0) from Demande d WHERE d.deleguation.id = :id")
-    int sumNbrAgentsFemmesByDeleguation(@Param("id") Long id);
+//    @Query("SELECT COALESCE(SUM(d.nbrAgentsHommes),0) from Demande d WHERE d.deleguation.id = :id")
+//    int sumNbrAgentsHommesByDeleguation(@Param("id") Long id);
+//
+//    @Query("SELECT COALESCE(SUM(d.nbrAgentsFemmes),0) from Demande d WHERE d.deleguation.id = :id")
+//    int sumNbrAgentsFemmesByDeleguation(@Param("id") Long id);
 
     @Query("SELECT COALESCE(SUM(d.nbrTotalBeneficiaires),0) from Demande d WHERE d.typeMilieu = :typeMilieu")
     int sumNbrTotalBeneficiairesByTypeMilieu(@Param("typeMilieu") String typeMilieu);

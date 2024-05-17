@@ -4,13 +4,11 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.web.multipart.MultipartFile;
 
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.zip.ZipFile;
 
 @Entity
 @Data
@@ -35,6 +33,10 @@ public class Demande {
     @JoinColumn(name = "coordiantion_id")
     private Coordination coordination;
 
+    @OneToMany(cascade = CascadeType.DETACH)
+    @JoinColumn(name = "autreFonctionnaire_id")
+    private List<AutreFonctionnaire> autreFonctionnaire;
+
     @Column(nullable = false)
     private String numAutorisation;
 
@@ -57,10 +59,29 @@ public class Demande {
     private int nbrBeneficiairesFemmes;
 
     @Column(nullable = false)
-    private int nbrAgentsHommes;
+    private int nbrAgentsHommesEN;
 
     @Column(nullable = false)
-    private int nbrAgentsFemmes;
+    private int nbrAgentsFemmesEN;
+
+    @Column(nullable = false)
+    private int nbrAgentsHommesAssociation;
+
+    @Column(nullable = false)
+    private int nbrAgentsFemmesAssociation;
+
+    @Column(nullable = false)
+    private int nbrAgentsHommesReanimationNational;
+
+    @Column(nullable = false)
+    private int nbrAgentsFemmesReanimationNational;
+
+    @Column(nullable = false)
+    private int nbrAgentsHommesCollectiviteTerritoriales;
+
+    @Column(nullable = false)
+    private int nbrAgentsFemmesCollectiviteTerritoriales;
+
 
     @Column(nullable = false)
     private String sujetDemande;
@@ -77,12 +98,29 @@ public class Demande {
     @Column(nullable = false)
     private String emailDirecteur;
 
+    @Column(nullable = false)
+    private int capacitePourHomme;
+
+    @Column(nullable = false)
+    private int capacitePourFemmes;
+
     //champs generé automatiquement
     private Date dateDemande;
 
     private int nbrTotalBeneficiaires;
 
+    private int nbrTotalAgentsEN;
+
+    private int nbrTotalAgentsAssociation;
+
+    private int nbrTotalAgentsReanimationNational;
+
+    private int nbrTotalAgentsCollectiviteTerritoriales;
+
+
     private int nbrTotalAgents;
+
+    private String capaciteChargeTotal;
 
     //champs unique
     @Column(unique = true)
@@ -99,7 +137,6 @@ public class Demande {
 
     private String rib;
 
-    private String capaciteChargeTotal;
 
     private int nbrBeneficiairesServiceTotal;
 
@@ -153,5 +190,7 @@ public class Demande {
     private int personneHandicape;
 
     private int femmeSitDifficile;
+
+
 
 }

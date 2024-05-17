@@ -25,15 +25,8 @@ public class DemandeService {
     @Autowired
     private CoordinationService coordinationService;
 
+
     public String generateCode(Demande demande){
-//        UUID id = UUID.randomUUID(); // Generating a unique ID
-//        long seed = System.currentTimeMillis(); // Using current time as seed for randomness
-//        Random rng = new Random(seed);
-//        long number;
-//        do {
-//            number = Math.abs(rng.nextLong() % 100000L); // Limiting the range to 5 digits
-//        } while (demandeRepository.findByCodeDemande(number).isPresent());
-//        return number;
         Calendar cal = Calendar.getInstance();
         cal.setTime(demande.getDateDemande());
         int year = cal.get(Calendar.YEAR);
@@ -79,6 +72,7 @@ public class DemandeService {
         Coordination coordination = coordinationService.findCoordinationById(demande.getCoordination().getId());
         Deleguation deleguation = deleguationService.getDeleguationById(demande.getDeleguation().getId());
 
+
         //generer les champs automatique
         //1- champs date
         Date date = new Date();
@@ -90,7 +84,15 @@ public class DemandeService {
         demande.setNbrTotalBeneficiaires(demande.getNbrBeneficiairesFemmes()+
                 demande.getNbrBeneficiairesHommes());
         //4-champs nbre total agents
-        demande.setNbrTotalAgents(demande.getNbrAgentsFemmes()+demande.getNbrAgentsHommes());
+        demande.setNbrTotalAgentsReanimationNational(demande.getNbrAgentsFemmesReanimationNational()+demande.getNbrAgentsHommesReanimationNational());
+        demande.setNbrTotalAgentsAssociation(demande.getNbrAgentsFemmesAssociation()+demande.getNbrAgentsHommesAssociation());
+        demande.setNbrTotalAgentsEN(demande.getNbrAgentsFemmesEN()+demande.getNbrAgentsHommesEN());
+        demande.setNbrTotalAgentsCollectiviteTerritoriales(demande.getNbrAgentsFemmesCollectiviteTerritoriales()+demande.getNbrAgentsHommesCollectiviteTerritoriales());
+
+
+        demande.setNbrTotalAgents(demande.getNbrTotalAgentsReanimationNational()+
+                demande.getNbrTotalAgentsAssociation() + demande.getNbrTotalAgentsEN()+
+                demande.getNbrTotalAgentsCollectiviteTerritoriales());
         //5- champs etat
         demande.setEtat("قيد العمل");
         //6- champs supprimé
@@ -136,8 +138,15 @@ public class DemandeService {
         demande.setNbrBeneficiairesHommes(newDemande.getNbrBeneficiairesHommes());
         demande.setNbrBeneficiairesFemmes(newDemande.getNbrBeneficiairesFemmes());
         demande.setNbrTotalBeneficiaires(newDemande.getNbrTotalBeneficiaires());
-        demande.setNbrAgentsHommes(newDemande.getNbrAgentsHommes());
-        demande.setNbrAgentsFemmes(newDemande.getNbrAgentsFemmes());
+        demande.setNbrAgentsHommesAssociation(newDemande.getNbrAgentsHommesAssociation());
+        demande.setNbrAgentsHommesEN(newDemande.getNbrAgentsHommesEN());
+        demande.setNbrAgentsHommesCollectiviteTerritoriales(newDemande.getNbrAgentsHommesCollectiviteTerritoriales());
+        demande.setNbrAgentsHommesReanimationNational(newDemande.getNbrAgentsHommesReanimationNational());
+        demande.setAutreFonctionnaire(newDemande.getAutreFonctionnaire());
+        demande.setNbrAgentsFemmesEN(newDemande.getNbrAgentsFemmesEN());
+        demande.setNbrAgentsFemmesAssociation(newDemande.getNbrAgentsFemmesAssociation());
+        demande.setNbrAgentsFemmesCollectiviteTerritoriales(newDemande.getNbrAgentsFemmesCollectiviteTerritoriales());
+        demande.setNbrAgentsFemmesReanimationNational(newDemande.getNbrAgentsFemmesReanimationNational());
         demande.setNbrTotalAgents(newDemande.getNbrTotalAgents());
         demande.setSujetDemande(newDemande.getSujetDemande());
         demande.setRib(newDemande.getRib());
@@ -322,8 +331,8 @@ public class DemandeService {
             public int demandesRefusees = demandeRepository.countDemandesRefusees();
             public int demandesUrbaines = demandeRepository.countByTypeMilieuUrbain();
             public int demandesRurales = demandeRepository.countByTypeMilieuRural();
-            public int agentsHommes = demandeRepository.sumNbrAgentsHommes();
-            public int agentsFemmes = demandeRepository.sumNbrAgentsFemmes();
+//            public int agentsHommes = demandeRepository.sumNbrAgentsHommes();
+//            public int agentsFemmes = demandeRepository.sumNbrAgentsFemmes();
             public int beneficiairesHommes = demandeRepository.sumNbrBeneficiairesHommes();
             public int beneficiairesFemmes = demandeRepository.sumNbrBeneficiairesFemmes();
             public int totalAgents = demandeRepository.sumNbrTotalAgents();
