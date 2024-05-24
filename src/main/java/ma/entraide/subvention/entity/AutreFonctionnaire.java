@@ -1,5 +1,6 @@
 package ma.entraide.subvention.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,4 +21,10 @@ public class AutreFonctionnaire {
     private int nbrHomme;
 
     private int nbrFemme;
+
+    @ManyToOne
+    @JoinColumn(name = "demande_id")
+    @JsonIgnore
+    private Demande demande;
+
 }

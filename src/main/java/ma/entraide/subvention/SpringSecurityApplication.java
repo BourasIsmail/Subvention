@@ -24,7 +24,7 @@ public class SpringSecurityApplication {
 	@Autowired
 	public CoordinationService coordinationService;
 	@Autowired
-	public DeleguationService delegationService;
+	public DeleguationService deleguationService;
 	@Autowired
 	public UserInfoService userInfoService;
 
@@ -57,13 +57,13 @@ public class SpringSecurityApplication {
 			logger.info("Running Spring Security Application ...");
 			//Admin Account
 
-
-			/*UserInfo admin = new UserInfo("P1936","moumen.lahcen@gmailcom","ADMIN_ROLES","P1936");
+/*
+			UserInfo admin = new UserInfo("P1936","moumen.lahcen@gmailcom","ADMIN_ROLES","P1936");
 			UserInfo admin2 = new UserInfo("ADMIN","ADMIN@gmailcom","ADMIN_ROLES","Entraide57");
 			userInfoService.addUser(admin);
-			userInfoService.addUser(admin2);*/
+			userInfoService.addUser(admin2);
 			//Coordinations
-/*
+
 			Coordination coordination1 = new Coordination("طنجة-تطوان-الحسيمة");
 			Coordination coordination2 = new Coordination("الشرق");
 			Coordination coordination3 = new Coordination("فاس-مكناس");
@@ -262,9 +262,9 @@ public class SpringSecurityApplication {
 			deleguationService.addDeleguation(deleguation80);
 			deleguationService.addDeleguation(deleguation81);
 			deleguationService.addDeleguation(deleguation82);
-*/
-//Users
 
+//Users
+*/
 
 			logger.info("end");
 		};

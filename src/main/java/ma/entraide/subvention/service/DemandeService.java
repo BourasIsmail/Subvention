@@ -1,5 +1,6 @@
 package ma.entraide.subvention.service;
 
+import ma.entraide.subvention.entity.AutreFonctionnaire;
 import ma.entraide.subvention.entity.Coordination;
 import ma.entraide.subvention.entity.Deleguation;
 import ma.entraide.subvention.entity.Demande;
@@ -25,6 +26,8 @@ public class DemandeService {
     @Autowired
     private CoordinationService coordinationService;
 
+    @Autowired
+    private AutreFonctionnaireService autreFonctionnaireService;
 
     public String generateCode(Demande demande){
         Calendar cal = Calendar.getInstance();
@@ -67,10 +70,17 @@ public class DemandeService {
 
     }
 
-    public Demande addDemande(Demande demande) throws Exception {
+    public List<AutreFonctionnaire> getAllAutreFonctionnaire(Long id){
+        Demande demande = getDemandeById(id);
+        return demande.getAutreFonctionnaire();
+    }
+
+    public String addDemande(Demande demande) throws Exception {
 
         Coordination coordination = coordinationService.findCoordinationById(demande.getCoordination().getId());
         Deleguation deleguation = deleguationService.getDeleguationById(demande.getDeleguation().getId());
+        List<AutreFonctionnaire> autreFonctionnaires = demande.getAutreFonctionnaire();
+
 
 
         //generer les champs automatique
@@ -113,7 +123,12 @@ public class DemandeService {
         demande.setCoordination(coordination);
         demande.setDeleguation(deleguation);
 
-        return demandeRepository.save(demande);
+        demandeRepository.save(demande);
+        for(AutreFonctionnaire a : autreFonctionnaires){
+            autreFonctionnaireService.add(demande.getId(), a);
+        }
+        demandeRepository.save(demande);
+        return "demande ajouté";
     }
 
     public Demande updateDemande(Long id, Demande newDemande){
@@ -142,7 +157,6 @@ public class DemandeService {
         demande.setNbrAgentsHommesEN(newDemande.getNbrAgentsHommesEN());
         demande.setNbrAgentsHommesCollectiviteTerritoriales(newDemande.getNbrAgentsHommesCollectiviteTerritoriales());
         demande.setNbrAgentsHommesReanimationNational(newDemande.getNbrAgentsHommesReanimationNational());
-        demande.setAutreFonctionnaire(newDemande.getAutreFonctionnaire());
         demande.setNbrAgentsFemmesEN(newDemande.getNbrAgentsFemmesEN());
         demande.setNbrAgentsFemmesAssociation(newDemande.getNbrAgentsFemmesAssociation());
         demande.setNbrAgentsFemmesCollectiviteTerritoriales(newDemande.getNbrAgentsFemmesCollectiviteTerritoriales());
@@ -197,6 +211,18 @@ public class DemandeService {
         }
         if(!demande.getCible().contains("النساء في وضعية صعبة")){
             demande.setFemmeSitDifficile(0);
+        }
+
+        //autre fonctionnaire
+
+        List<AutreFonctionnaire> autreFonctionnaires = demande.getAutreFonctionnaire();
+        for(AutreFonctionnaire a : autreFonctionnaires){
+            autreFonctionnaireService.delete(a);
+        }
+
+        autreFonctionnaires = newDemande.getAutreFonctionnaire();
+        for(AutreFonctionnaire a : autreFonctionnaires){
+            autreFonctionnaireService.add(id, a);
         }
 
         //date de modification

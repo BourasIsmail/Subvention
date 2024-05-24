@@ -1,5 +1,6 @@
 package ma.entraide.subvention.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,8 +34,7 @@ public class Demande {
     @JoinColumn(name = "coordiantion_id")
     private Coordination coordination;
 
-    @OneToMany(cascade = CascadeType.DETACH)
-    @JoinColumn(name = "autreFonctionnaire_id")
+    @OneToMany(mappedBy = "demande")
     private List<AutreFonctionnaire> autreFonctionnaire;
 
     @Column(nullable = false)

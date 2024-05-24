@@ -1,5 +1,6 @@
 package ma.entraide.subvention.controller;
 
+import ma.entraide.subvention.entity.AutreFonctionnaire;
 import ma.entraide.subvention.entity.Demande;
 import ma.entraide.subvention.entity.ResponseData;
 import ma.entraide.subvention.service.DemandeService;
@@ -29,6 +30,12 @@ public class DemandeController {
     public ResponseEntity<List<Demande>> getAllDemandes(){
         List<Demande> demandes = demandeService.getAllDemande();
         return new ResponseEntity<>(demandes, HttpStatus.OK);
+    }
+
+    @GetMapping("/fonctionnaire/{id}")
+    public ResponseEntity<List<AutreFonctionnaire>> getFonctionnaire(@PathVariable Long id){
+        List<AutreFonctionnaire> a = demandeService.getAllAutreFonctionnaire(id);
+        return new ResponseEntity<>(a, HttpStatus.OK);
     }
 
     @GetMapping("/corbeille")
@@ -64,7 +71,7 @@ public class DemandeController {
     @PostMapping("/addDemande")
     public ResponseEntity<?> ajouterDemande(@RequestBody Demande newDemande) {
         try {
-            Demande demande = demandeService.addDemande(newDemande);
+            String demande = demandeService.addDemande(newDemande);
             return new ResponseEntity<>(demande, HttpStatus.CREATED);
         } catch (Exception e) {
             // Handle the exception here and return an appropriate error response
